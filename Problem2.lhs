@@ -6,10 +6,10 @@ By considering the terms in the Fibonacci sequence whose values do not exceed fo
 
 > fib :: [Integer]
 > fib = 0 : 1 : (zipWith (+) fib (tail fib))
->
+
 > answer :: Integer
 > answer = sum (filter even (takeWhile (< 4 * 10^6) fib))
->
+
 > main :: IO ()
 > main = print answer
 
