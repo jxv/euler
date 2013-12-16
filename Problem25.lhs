@@ -21,11 +21,11 @@ The 12th term, F12, is the first term to contain three digits.
 
 What is the first term in the Fibonacci sequence to contain 1000 digits?
 
->fib :: [Integer]
->fib = 0 : 1 : (zipWith (+) fib (tail fib))
+> fib :: [Integer]
+> fib = 0 : 1 : (zipWith (+) fib (tail fib))
 >
->answer :: Integer
->answer = head (dropWhile (<= 10^999) fib)
+> answer :: Integer
+> answer = head (dropWhile (<= 10^999) fib)
 >
->main :: IO ()
->main = print answer
+> main :: IO ()
+> main = print answer
