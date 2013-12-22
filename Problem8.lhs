@@ -21,8 +21,6 @@ Find the greatest product of five consecutive digits in the 1000-digit number.
 05886116467109405077541002256983155200055935729725
 71636269561882670428252483600823257530420752963450
 
-> import Control.Monad.Fix
-> 
 > digits :: [Integer]
 > digits =  map (read . (:[])) $
 >   "73167176531330624919225119674426574742355349194934" ++
@@ -45,11 +43,16 @@ Find the greatest product of five consecutive digits in the 1000-digit number.
 >   "84580156166097919133875499200524063689912560717606" ++
 >   "05886116467109405077541002256983155200055935729725" ++
 >   "71636269561882670428252483600823257530420752963450" 
->
+>  
+> fallingConsecutives :: [a] -> [[a]]
+> fallingConsecutives xs = 
+>   let falling a (as, n) = (drop n a : as, n + 1)
+>       dups = replicate (length xs) xs
+>   in fst (foldr falling ([], 0) dups)
+>  
 > answer :: Integer
-> answer = foldr1 max (map (product . take 5) (fst ls))
->   where ls = foldr (\l (ls, n) -> (drop n l : ls, n + 1)) ([], 0) (replicate (length digits) digits)
->
+> answer = foldr1 max (map product consecs)
+>  where consecs = map (take 5) (fallingConsecutives digits)
+>  
 > main :: IO ()
 > main = print answer
-
