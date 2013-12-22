@@ -43,16 +43,13 @@ Find the greatest product of five consecutive digits in the 1000-digit number.
 >   "84580156166097919133875499200524063689912560717606" ++
 >   "05886116467109405077541002256983155200055935729725" ++
 >   "71636269561882670428252483600823257530420752963450" 
->  
-> fallingConsecutives :: [a] -> [[a]]
-> fallingConsecutives xs = 
->   let falling a (as, n) = (drop n a : as, n + 1)
->       dups = replicate (length xs) xs
->   in fst (foldr falling ([], 0) dups)
+> 
+> fall []     = []
+> fall (x:xs) = xs : fall xs 
 >  
 > answer :: Integer
 > answer = foldr1 max (map product consecs)
->  where consecs = map (take 5) (fallingConsecutives digits)
+>  where consecs = map (take 5) (fall digits)
 >  
 > main :: IO ()
 > main = print answer
