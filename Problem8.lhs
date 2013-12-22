@@ -48,8 +48,8 @@ Find the greatest product of five consecutive digits in the 1000-digit number.
 > fall (x:xs) = xs : fall xs 
 >  
 > answer :: Integer
-> answer = foldr1 max (map product consecs)
->  where consecs = map (take 5) (fall digits)
+> answer = foldr1 max allproducts
+>   where allproducts = (map product . take 5) (fall digits)
 >  
 > main :: IO ()
 > main = print answer
