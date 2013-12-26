@@ -56,7 +56,7 @@ What is the greatest product of four adjacent numbers in the same direction (up,
 > adjacent s row = if length row >= s
 >                    then take s row : adjacent s (drop 1 row)
 >                    else []
->
+> 
 > diagonal :: (Int -> [Integer] -> Int -> Integer) -> Int -> [[Integer]] -> [[Integer]]
 > diagonal _ _ [] = []
 > diagonal f s g  = if s > 0 && len >= s && rlen >= s
@@ -65,7 +65,7 @@ What is the greatest product of four adjacent numbers in the same direction (up,
 >                 where len  = length g
 >                       rlen = length $ head g
 >                       rows = [zipWith (f s) (map (drop r) g) [0..(s - 1)] | r <- [0..(rlen - s)]]
-> 
+>  
 > combo :: Int -> [[Integer]] -> [[Integer]]
 > combo s g =
 >   let horizontal = adjacent s (foldr1 (++) g)
@@ -73,9 +73,9 @@ What is the greatest product of four adjacent numbers in the same direction (up,
 >       downright  = diagonal (\_ -> (!!)) s g
 >       downleft   = diagonal (\s as i -> as !! (s - i - 1)) s g
 >   in horizontal ++ vertical ++ downright ++ downleft
-> 
+>  
 > answer :: Integer
 > answer = foldr1 max (map product (combo 4 grid))
-> 
+>  
 > main :: IO ()
 > main = print answer
