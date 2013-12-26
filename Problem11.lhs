@@ -25,6 +25,7 @@ The product of these numbers is 26  63  78  14 = 1788696.
 What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20x20 grid?
 
 > import Data.List
+> import Control.Parallel.Strategies
 > 
 > grid :: [[Integer]]
 > grid = map (map read . words) $
@@ -75,7 +76,7 @@ What is the greatest product of four adjacent numbers in the same direction (up,
 >   in horizontal ++ vertical ++ downright ++ downleft
 >  
 > answer :: Integer
-> answer = foldr1 max (map product (combo 4 grid))
+> answer = foldr1 max (parMap return product (combo 4 grid))
 >  
 > main :: IO ()
 > main = print answer
