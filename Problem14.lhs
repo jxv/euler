@@ -23,12 +23,12 @@ NOTE: Once the chain starts the terms are allowed to go above one million
 >                          else if odd n
 >                                  then chain (3 * n + 1)
 >                                  else chain (n `div` 2)
->
+> 
 > answer :: Integer
 > answer = longestChain [1..1000000]
 >   where longestChain = fst .
 >                        foldr1 (\a@(_,b) c@(_,d) -> if b > d then a else c) .
 >                        parMap rseq collatz
-> 
+>  
 > main :: IO () 
 > main = print answer
