@@ -7,11 +7,11 @@ Evaluate the sum of all the amicable numbers under 10000.
 
 > import Data.List (nub)
 > 
-> divisors :: Int -> [Int]
-> divisors n = nub [m | m <- [1..n], n `mod` m == 0]
+> properDivisors :: Int -> [Int]
+> properDivisors n = nub [m | m <- [1..(n - 1)], n `mod` m == 0]
 > 
 > d :: Int -> Int
-> d = sum . divisors
+> d = sum . properDivisors
 >
 > answer :: Int
 > answer = 
