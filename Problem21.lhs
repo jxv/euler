@@ -6,18 +6,18 @@ For example, the proper divisors of 220 are 1, 2, 4, 5, 10, 11, 20, 22, 44, 55 a
 Evaluate the sum of all the amicable numbers under 10000.
 
 > import Data.List (nub)
-> 
+>  
 > properDivisors :: Int -> [Int]
 > properDivisors n = nub [m | m <- [1..(n - 1)], n `mod` m == 0]
-> 
+>  
 > d :: Int -> Int
 > d = sum . properDivisors
->
+> 
 > answer :: Int
 > answer = 
 >   let pairs = [(n, d n) | n <- [1..10000]]
 >       amiciable (n, d) = (or . map (\(m,b) -> m /= n && m == d && b == n) ) pairs
 >   in (sum . map fst . filter amiciable) pairs
-> 
+>  
 > main :: IO ()
 > main = print answer
