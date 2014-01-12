@@ -15,8 +15,9 @@ Evaluate the sum of all the amicable numbers under 10000.
 >
 > answer :: Int
 > answer = 
->   let pairs = [(n, d n) | n <- [1..1000]] 
->   in (sum . map fst . filter (\(n,d) -> or $ map (\(m,b) -> m == d && b == n) pairs)) pairs
+>   let pairs = [(n, d n) | n <- [1..10000]]
+>       amiciable (n, d) = (or . map (\(m,b) -> m /= n && m == d && b == n) ) pairs
+>   in (sum . map fst . filter amiciable) pairs
 > 
 > main :: IO ()
 > main = print answer
