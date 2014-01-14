@@ -13,6 +13,9 @@ Find the sum of all the positive integers which cannot be written as the sum of 
 >  
 > isAbundant :: Integer ->  Bool
 > isAbundant n = n < (sum . properDivisors) n
+> 
+> isSumOfAnyTwo :: [Integer] -> Integer -> Bool
+> isSumOfAnyTwo zs n = or [x + y == n | x <- zs, n > x, y <- zs, n > y]
 >  
 > limit :: Integer
 > limit = 28123
@@ -20,11 +23,8 @@ Find the sum of all the positive integers which cannot be written as the sum of 
 > abundants :: [Integer]
 > abundants = filter isAbundant [1..limit]
 > 
-> isSumOfTwoAbundants :: Integer -> Bool
-> isSumOfTwoAbundants n = or [x + y == n | x <- abundants, n > x, y <- abundants, n > y]
->  
 > answer :: Integer  
-> answer = (sum . filter (not . isSumOfTwoAbundants)) [1..limit]
+> answer = (sum . filter (not . isSumOfAnyTwo abundants)) [1..limit]
 > 
 > main :: IO ()
 > main = print answer
