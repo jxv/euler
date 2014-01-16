@@ -23,9 +23,12 @@ What is the first term in the Fibonacci sequence to contain 1000 digits?
 
 > fib :: [Integer]
 > fib = 0 : 1 : (zipWith (+) fib (tail fib))
+>
+> fibTerms :: [(Integer, Integer)] 
+> fibTerms = zip [0..] fib
 > 
 > answer :: Integer
-> answer = head (dropWhile (<= 10^999) fib)
+> answer = (fst . head . dropWhile ((< 10^999) . snd)) fibTerms
 > 
 > main :: IO ()
 > main = print answer
